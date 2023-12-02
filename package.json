@@ -4,7 +4,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "checker": "astro check",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
@@ -12,8 +11,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "astro": "^3.6.0",
-    "typescript": "^5.3.2"
+    "astro": "^3.6.0"
   }
 }
