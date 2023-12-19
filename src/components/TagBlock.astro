@@ -6,10 +6,15 @@ const { list, type, isIndex, current } = Astro.props
 
 const randomColor = randomColorClosure()
 
-const pathname = {
-    categories: BaseUrl.CATEGORIES,
-    tags: BaseUrl.TAGS,
-}
+let pathname
+if (type == 'categories') pathname = BaseUrl.CATEGORIES
+if (type == 'tags') pathname = BaseUrl.TAGS
+
+// to fix:
+// const pathname = {
+//     categories: BaseUrl.CATEGORIES,
+//     tags: BaseUrl.TAGS,
+// }
 ---
 
 <div class="categories-tags">
@@ -17,7 +22,7 @@ const pathname = {
         list.map(item => (
             <span>
                 <a
-                    href={pathname[type] + item}
+                    href={pathname + item}
                     style={
                         isIndex
                             ? `background: ${randomColor()}`
