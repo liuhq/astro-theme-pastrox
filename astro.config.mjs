@@ -7,14 +7,14 @@ export default defineConfig({
   publicDir: './public',
   outDir: './dist',
   cacheDir: './node_modules/.astro',
-  site: 'https://sample.qoqyir.com/astro-theme-pastrox/',
+  site: 'https://sample.qoqyir.com',
   compressHTML: true,
-  base: '/',
+  base: 'astro-theme-pastrox/',
   trailingSlash: 'ignore',
   output: 'static',
   build: {
     format: 'file',
-    assets: '_astro',
+    assets: 'bundle',
   },
   markdown: {
     syntaxHighlight: false,
