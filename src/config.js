@@ -125,7 +125,7 @@ export const SITE = {
 
 export const BaseUrl = {
   BASE: import.meta.env.BASE_URL,
-  POST: import.meta.env.BASE_URL + 'posts/',
-  CATEGORIES: import.meta.env.BASE_URL + 'categories/',
-  TAGS: import.meta.env.BASE_URL + 'tags/',
+  POST: import.meta.env.BASE_URL + '/posts/',
+  CATEGORIES: import.meta.env.BASE_URL + '/categories/',
+  TAGS: import.meta.env.BASE_URL + '/tags/',
 }
