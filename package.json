@@ -1,8 +1,12 @@
 {
   "name": "astro-theme-pastrox",
-  "type": "module",
+  "description": "PastroX is an Astro theme, and inherit from ParticleX which is a Hexo theme.",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -16,5 +20,14 @@
   "devDependencies": {
     "prettier": "^3.1.0",
     "prettier-plugin-astro": "^0.12.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qoqiyu/astro-theme-pastrox.git"
+  },
+  "author": {
+    "name": "QiYu",
+    "email": "hora.liu@outlook.com"
+  },
+  "homepage": "https://sample.qoqyir.com/astro-theme-pastrox"
 }
