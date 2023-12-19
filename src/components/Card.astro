@@ -1,11 +1,11 @@
 ---
-import { SITE } from '#config'
+import { BaseUrl, SITE } from '#config'
 ---
 
 <div id="card-style">
     <div id="card-div">
         <div class="avatar">
-            <img src={SITE.avatar} alt="avatar" />
+            <img src={BaseUrl.BASE + SITE.avatar} alt="avatar" />
         </div>
         <div class="name">{SITE.author}</div>
         <div class="description" set:html={SITE.card.description} />

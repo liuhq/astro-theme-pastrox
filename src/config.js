@@ -8,12 +8,12 @@ export const SITE = {
   language: 'zh',
 
   // Profile picture
-  avatar: '/images/avatar.jpg',
+  avatar: 'images/avatar.jpg',
   // true: use favicon.svg | false: use avatar
   SiteIcon: false,
 
   // Home page background image
-  background: ['/images/background.png'],
+  background: ['images/background.png'],
 
   // Optional colors for category and tag
   colors: ['#ffa2c4', '#00bcd4', '#03a9f4', '#00a596', '#ff7d73'],
@@ -68,31 +68,31 @@ export const SITE = {
       name: 'Home',
       iconName: 'house',
       iconTheme: 'solid',
-      link: '/',
+      link: '',
     },
     {
       name: 'About',
       iconName: 'id-card',
       iconTheme: 'solid',
-      link: '/about',
+      link: 'about',
     },
     {
       name: 'Archives',
       iconName: 'box-archive',
       iconTheme: 'solid',
-      link: '/archives',
+      link: 'archives',
     },
     {
       name: 'Categories',
       iconName: 'bookmark',
       iconTheme: 'solid',
-      link: '/categories',
+      link: 'categories',
     },
     {
       name: 'Tags',
       iconName: 'tags',
       iconTheme: 'solid',
-      link: '/tags',
+      link: 'tags',
     },
   ],
 

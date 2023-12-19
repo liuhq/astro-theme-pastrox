@@ -14,7 +14,7 @@ const { type } = Astro.props
         </a>
         {
             SITE.menu.map(({ name, iconName, iconTheme, link }) => (
-                <a href={link}>
+                <a href={BaseUrl.BASE + link}>
                     <i class:list={[`fa-${iconTheme}`, `fa-${iconName}`, 'fa-fw']} />
                     <span>&ensp;{name}</span>
                 </a>
@@ -29,7 +29,7 @@ const { type } = Astro.props
         <div class="items">
             {
                 SITE.menu.map(({ name, iconName, iconTheme, link }) => (
-                    <a href={link}>
+                    <a href={BaseUrl.BASE + link}>
                         <div class="item">
                             <div style="min-width: 20px; max-width: 50px; width: 10%">
                                 <i class:list={[`fa-${iconTheme}`, `fa-${iconName}`, 'fa-fw']} />

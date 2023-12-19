@@ -9,7 +9,7 @@ export default defineConfig({
   cacheDir: './node_modules/.astro',
   site: 'https://sample.qoqyir.com',
   compressHTML: true,
-  base: 'astro-theme-pastrox/',
+  base: '/astro-theme-pastrox/',
   trailingSlash: 'ignore',
   output: 'static',
   build: {

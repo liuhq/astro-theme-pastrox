@@ -1,5 +1,5 @@
 ---
-import { SITE } from '#config'
+import { BaseUrl, SITE } from '#config'
 import Import from '#components/Import.astro'
 import Menu from '#components/Menu.astro'
 import Current from '#components/Current.astro'
@@ -28,9 +28,9 @@ const usePagination = (type === 'categories' || type === 'tags') && page.lastPag
         <meta name="generator" content={Astro.generator} />
         {
             SITE.SiteIcon ? (
-                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <link rel="icon" type="image/svg+xml" href={BaseUrl.BASE + 'favicon.svg'} />
             ) : (
-                <link rel="icon" href={SITE.avatar} />
+                <link rel="icon" href={BaseUrl.BASE + SITE.avatar} />
             )
         }
         <Import />

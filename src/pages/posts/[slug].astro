@@ -14,7 +14,7 @@ export const getStaticPaths = async () => {
 
 const { entry } = Astro.props
 const { data } = entry
-const { Content, headings } = await entry.render()
+const { Content } = await entry.render()
 
 const title = `${data.title} | ${SITE.title}`
 const type = 'post'
