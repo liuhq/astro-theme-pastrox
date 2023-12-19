@@ -1,0 +1,46 @@
+---
+import { SITE } from '#config'
+import Import from '#components/Import.astro'
+import Menu from '#components/Menu.astro'
+import Current from '#components/Current.astro'
+import Footer from '#components/Footer.astro'
+import '#styles/main.css'
+
+const { type, title, page, pathname } = Astro.props
+
+const usePagination = (type === 'categories' || type === 'tags') && page.lastPage !== 1
+---
+
+<script src="../lib/highlightFormat.js"></script>
+
+<script>
+    window.addEventListener('load', () => document.getElementById('main').setAttribute('class', 'into-enter-active'))
+</script>
+
+<html lang={SITE.language}>
+    <head>
+        <meta charset="utf-8" />
+        <title>{title}</title>
+        <meta name="author" content={SITE.author} />
+        <meta name="description" content={SITE.description} />
+        <meta name="keywords" content={SITE.keywords} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="generator" content={Astro.generator} />
+        {
+            SITE.SiteIcon ? (
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+            ) : (
+                <link rel="icon" href={SITE.avatar} />
+            )
+        }
+        <Import />
+    </head>
+    <body>
+        <Menu {type} />
+        <div id="main" class="into-enter-from">
+            <slot />
+            {usePagination && <Current {page} {pathname} />}
+            <Footer />
+        </div>
+    </body>
+</html>

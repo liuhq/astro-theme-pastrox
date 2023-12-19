@@ -1,0 +1,45 @@
+---
+import { SITE, BaseUrl } from '#config'
+
+const { type } = Astro.props
+---
+
+<script src="../lib/menu.js"></script>
+
+<input type="checkbox" name="show-menu-items" id="show-menu-items" />
+<div id="menu" class:list={[{ 'menu-color': type === 'index' }]}>
+    <nav id="desktop-menu">
+        <a class="title" href={BaseUrl.BASE}>
+            <span>{SITE.title.toUpperCase()}</span>
+        </a>
+        {
+            SITE.menu.map(({ name, iconName, iconTheme, link }) => (
+                <a href={link}>
+                    <i class:list={[`fa-${iconTheme}`, `fa-${iconName}`, 'fa-fw']} />
+                    <span>&ensp;{name}</span>
+                </a>
+            ))
+        }
+    </nav>
+    <nav id="mobile-menu">
+        <label class="title" for="show-menu-items">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;{SITE.title.toUpperCase()}</span>
+        </label>
+        <div class="items">
+            {
+                SITE.menu.map(({ name, iconName, iconTheme, link }) => (
+                    <a href={link}>
+                        <div class="item">
+                            <div style="min-width: 20px; max-width: 50px; width: 10%">
+                                <i class:list={[`fa-${iconTheme}`, `fa-${iconName}`, 'fa-fw']} />
+                            </div>
+                            <div style="min-width: 100px; max-width: 150%; width: 20%">{name}</div>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
+    </nav>
+</div>
+<div id="menu-curtain"></div>

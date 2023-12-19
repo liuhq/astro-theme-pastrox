@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content'
+import { SITE, BaseUrl } from '#config'
+import { randomColorClosure } from '#lib/randomColor'
+import BaseLayout from '#layouts/BaseLayout.astro'
+
+export const getStaticPaths = async () => {
+    const postEntries = await getCollection('posts')
+    return postEntries.map(entry => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }))
+}
+
+const { entry } = Astro.props
+const { data } = entry
+const { Content, headings } = await entry.render()
+
+const title = `${data.title} | ${SITE.title}`
+const type = 'post'
+
+const randomColor = randomColorClosure()
+---
+
+<BaseLayout {type} {title}>
+    <div class="article">
+        <div>
+            <h1>{data.title}</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                {`${data.date.getUTCFullYear()}/${data.date.getUTCMonth() + 1}/${data.date.getUTCDate()}`}
+            </span>
+            {
+                data.category && (
+                    <span class="category">
+                        <a href={BaseUrl.CATEGORIES + data.category}>
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw" />
+                            </span>
+                            {data.category}
+                        </a>
+                    </span>
+                )
+            }
+            {
+                data.tags && data.tags.length > 0 && (
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw" />
+                        </span>
+                        {data.tags.map(tag => (
+                            <span class="tag">
+                                <a href={BaseUrl.TAGS + tag} style={`color: ${randomColor()}`}>
+                                    {tag}
+                                </a>
+                            </span>
+                        ))}
+                    </span>
+                )
+            }
+        </div>
+        <div class="content">
+            <Content />
+        </div>
+    </div>
+</BaseLayout>

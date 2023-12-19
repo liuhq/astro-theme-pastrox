@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content'
+import { SITE } from '#config'
+import { postsSort } from '#lib/postsSort'
+import BaseLayout from '#layouts/BaseLayout.astro'
+import Card from '#components/Card.astro'
+import Posts from '#components/Posts.astro'
+import Current from '#components/Current.astro'
+
+export const getStaticPaths = async ({ paginate }) => {
+    const postEntries = await getCollection('posts')
+    const posts = postsSort(postEntries, true)
+    return paginate(posts, { pageSize: SITE.pageSize })
+}
+
+const { page } = Astro.props
+
+// @ts-ignore
+const posts = page.data
+const type = 'index'
+const title = SITE.title
+const pathname = ''
+// @ts-ignore
+const usePagination = page.lastPage !== 1
+---
+
+<script src="../lib/home.js"></script>
+
+<BaseLayout {type} {title}>
+    <div id="home-head">
+        <div id="home-background" data-images={SITE.background.map(v => v)}></div>
+        <div id="home-info">
+            <span class="loop"></span>
+            <span class="loop"></span>
+            <span class="loop"></span>
+            <span class="loop"></span>
+            <span class="info">
+                <div class="wrap">
+                    <h1>{SITE.title}</h1>
+                    <h3>{SITE.subtitle}</h3>
+                    <h5>{SITE.description}</h5>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div id="home-posts-wrap" class:list={[{ 'home-posts-wrap-no-card': !SITE.card.enable }]}>
+        <div id="home-posts">
+            <Posts {posts} />
+            {usePagination && <Current {page} {pathname} />}
+        </div>
+        {
+            SITE.card.enable && (
+                <div id="home-card">
+                    <Card />
+                </div>
+            )
+        }
+    </div>
+</BaseLayout>

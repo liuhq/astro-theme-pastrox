@@ -1,0 +1,33 @@
+---
+import { SITE } from '#config'
+---
+
+<footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            {`${SITE.footer.since} - ${new Date().getUTCFullYear()} ${SITE.title}`}
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+             &commat;{SITE.author}
+        </div>
+        <div>
+            Based on <a href="https://astro.build/">Astro Engine</a> &amp;
+            <a href="https://github.com/qoqiyu/astro-theme-pastrox">Pastrox Theme</a> ( inherited from
+            <a href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a> )
+        </div>
+        {
+            SITE.footer.ICP.enable && (
+                <div>
+                    备案号：
+                    {SITE.footer.ICP.link ? (
+                        <a href={SITE.footer.ICP.link}>{SITE.footer.ICP.code}</a>
+                    ) : (
+                        SITE.footer.ICP.code
+                    )}
+                </div>
+            )
+        }
+    </div>
+</footer>

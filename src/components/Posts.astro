@@ -1,0 +1,61 @@
+---
+import { BaseUrl } from '#config'
+import { randomColorClosure } from '#lib/randomColor'
+
+const { posts } = Astro.props
+
+const randomColor = randomColorClosure()
+---
+
+{
+    posts.map(({ slug, data: { title, date, description, category, tags, pinned } }) => (
+        <div class="post">
+            <a href={BaseUrl.POST + slug}>
+                <h2 class="post-title">{title}</h2>
+            </a>
+            <div class="category-and-date">
+                {category && (
+                    <span class="category">
+                        <a href={BaseUrl.CATEGORIES + category}>
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw" />
+                            </span>
+                            {category}
+                        </a>
+                    </span>
+                )}
+                <span class="date">
+                    <span class="icon">
+                        <i class="fa-solid fa-calendar fa-fw" />
+                    </span>
+                    {`${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}`}
+                </span>
+                {pinned && (
+                    <span class="special">
+                        <i class="fa-solid fa-grip-vertical fa-fw" />
+                    </span>
+                )}
+            </div>
+            <div class="description">
+                <div class="content" set:html={description} />
+            </div>
+            <div class="post-tags">
+                {tags && tags.length !== 0 && (
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw" />
+                    </span>
+                )}
+                {tags.map(tag => (
+                    <span class="tag">
+                        <a href={BaseUrl.TAGS + tag} style={`color: ${randomColor()}`}>
+                            {tag}
+                        </a>
+                    </span>
+                ))}
+            </div>
+            <a href={BaseUrl.POST + slug} class="go-post">
+                阅读全文
+            </a>
+        </div>
+    ))
+}

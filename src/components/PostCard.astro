@@ -1,0 +1,50 @@
+---
+import { BaseUrl } from '#config'
+import { randomColorClosure } from '#lib/randomColor'
+
+const { post } = Astro.props
+
+const randomColor = randomColorClosure()
+---
+
+<div class="timeline" data-title={post.data.title.toLowerCase().replace(/\s+/g, '')}>
+    <div class="timeline-tail"></div>
+    <div class="timeline-content">
+        <div class="item-time">
+            {`${post.data.date.getUTCFullYear()}/${post.data.date.getUTCMonth() + 1}/${post.data.date.getUTCDate()}`}
+        </div>
+        <a href={BaseUrl.POST + post.slug}>
+            <h3>{post.data.title}</h3>
+        </a>
+        <div class="info">
+            {
+                post.data.category && (
+                    <span class="category">
+                        <a href={BaseUrl.CATEGORIES + post.data.category}>
+                            <span class="icon">
+                                <i class="fa-solid fa-bookmark fa-fw" />
+                            </span>
+                            {post.data.category}
+                        </a>
+                    </span>
+                )
+            }
+            {
+                post.data.tags && post.data.tags.length > 0 && (
+                    <span class="tags">
+                        <span class="icon">
+                            <i class="fa-solid fa-tags fa-fw" />
+                        </span>
+                        {post.data.tags.map(tag => (
+                            <span class="tag">
+                                <a href={BaseUrl.TAGS + tag} style={`color: ${randomColor()}`}>
+                                    {tag}
+                                </a>
+                            </span>
+                        ))}
+                    </span>
+                )
+            }
+        </div>
+    </div>
+</div>

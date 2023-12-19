@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content'
+import { SITE } from '#config'
+import BaseLayout from '#layouts/BaseLayout.astro'
+import TagBlock from '#components/TagBlock.astro'
+
+const postEntries = await getCollection('posts')
+const allCategories = [...new Set(postEntries.map(post => post.data.category))]
+allCategories.sort()
+
+const type = 'categories-index'
+const title = `Categories | ${SITE.title}`
+---
+
+<BaseLayout {type} {title}>
+    <div id="archives">
+        <TagBlock list={allCategories} type={'categories'} isIndex={true} current={undefined} />
+    </div>
+</BaseLayout>

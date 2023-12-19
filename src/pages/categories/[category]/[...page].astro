@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content'
+import { SITE, BaseUrl } from '#config'
+import { postsSort } from '#lib/postsSort'
+import BaseLayout from '#layouts/BaseLayout.astro'
+import TagBlock from '#components/TagBlock.astro'
+import PostCard from '#components/PostCard.astro'
+
+export const getStaticPaths = async ({ paginate }) => {
+    const postEntries = await getCollection('posts')
+    const allCategories = [...new Set(postEntries.map(post => post.data.category))]
+    allCategories.sort()
+    return allCategories.flatMap(category => {
+        const filterPosts = postsSort(
+            postEntries.filter(post => post.data.category === category),
+            false
+        )
+        return paginate(filterPosts, {
+            params: { category },
+            props: {
+                currentCategory: category,
+                allCategories,
+            },
+            pageSize: SITE.pageSize,
+        })
+    })
+}
+
+const { currentCategory, allCategories, page } = Astro.props
+
+const type = 'categories'
+const title = `Categories: ${currentCategory} | ${SITE.title}`
+const pathname = BaseUrl.CATEGORIES + currentCategory
+---
+
+<BaseLayout {type} {title} {page} {pathname}>
+    <div id="archives">
+        <TagBlock list={allCategories} type={'categories'} isIndex={false} current={currentCategory} />
+        {page.data.map(post => <PostCard {post} />)}
+    </div>
+</BaseLayout>

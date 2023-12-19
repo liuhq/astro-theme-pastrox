@@ -1,0 +1,32 @@
+---
+import { getEntry } from 'astro:content'
+import { SITE } from '#config'
+import BaseLayout from '#layouts/BaseLayout.astro'
+
+const aboutEntry = await getEntry('about', 'about')
+
+const data = aboutEntry.data
+const { Content } = await aboutEntry.render()
+
+const type = 'post'
+const title = `${data.title} | ${SITE.title}`
+---
+
+<BaseLayout {type} {title}>
+    <div class="article">
+        <div>
+            <h1>{data.title}</h1>
+        </div>
+        <div class="info">
+            <span class="date">
+                <span class="icon">
+                    <i class="fa-solid fa-calendar fa-fw"></i>
+                </span>
+                {`${data.date.getUTCFullYear()}/${data.date.getUTCMonth() + 1}/${data.date.getUTCDate()}`}
+            </span>
+        </div>
+        <div class="content">
+            <Content />
+        </div>
+    </div>
+</BaseLayout>

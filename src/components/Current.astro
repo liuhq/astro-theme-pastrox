@@ -1,0 +1,51 @@
+---
+const { pathname, page } = Astro.props
+---
+
+<div class="page-current">
+    {
+        1 !== page.currentPage && (
+            <>
+                <a class="page-num" href={page.url.prev}>
+                    <i class="fa-solid fa-caret-left fa-fw" />
+                </a>
+                <a class="page-num" href={pathname + '/'}>
+                    1
+                </a>
+                {2 !== page.currentPage && <span class="page-omit">...</span>}
+            </>
+        )
+    }
+    <span class="current">{page.currentPage}</span>
+    {
+        page.lastPage >= page.currentPage + 1 && (
+            <a href={pathname + `/${page.currentPage + 1}`} class="page-num">
+                {page.currentPage + 1}
+            </a>
+        )
+    }
+    {
+        page.lastPage >= page.currentPage + 2 && (
+            <a href={pathname + `/${page.currentPage + 2}`} class="page-num">
+                {page.currentPage + 2}
+            </a>
+        )
+    }
+    {
+        page.lastPage >= page.currentPage + 3 && (
+            <>
+                <span class="page-omit">...</span>
+                <a href={pathname + `/${page.lastPage}`} class="page-num">
+                    {page.lastPage}
+                </a>
+            </>
+        )
+    }
+    {
+        page.lastPage !== page.currentPage && (
+            <a href={page.url.next} class="page-num">
+                <i class="fa-solid fa-caret-right fa-fw" />
+            </a>
+        )
+    }
+</div>
