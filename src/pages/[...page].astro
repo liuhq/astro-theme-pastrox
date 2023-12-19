@@ -28,7 +28,7 @@ const usePagination = page.lastPage !== 1
 
 <BaseLayout {type} {title}>
     <div id="home-head">
-        <div id="home-background" data-images={SITE.background.map(v => (BaseUrl.POST + v))}></div>
+        <div id="home-background" data-images={SITE.background.map(v => (BaseUrl.BASE + v))}></div>
         <div id="home-info">
             <span class="loop"></span>
             <span class="loop"></span>
